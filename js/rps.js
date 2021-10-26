@@ -1,6 +1,6 @@
 let skoreHrac = 0;   
 let skorePC = 0;
-let mojeVolba = "nic";          // string pro hráčův input
+let mojeVolba;          // string pro hráčův input
 let spatneZadani;                   // boolean pro vyhodnocení hráčova inputu
 
 // Nejdříve definuji funkce, které později využiji
