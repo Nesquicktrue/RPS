@@ -1,12 +1,15 @@
 let skoreHrac = 0;   
 let skorePC = 0;
 let mojeVolba;
-let cisloKola = 1;  
-let vysledekKola;       
+let cisloKola = 0;  
+let vysledekKola;
+let pocetKol = 5;       
 
 const tlacitkoNuzky = document.querySelector("#nuzky");  //definuji tlačítka
 const tlacitkoPapir = document.querySelector(".papir");
 const tlacitkoKamen = document.querySelector(".kamen");
+const divTlacitka = document.querySelector(".tlacitka");
+const divKdoVyhral = document.querySelector(".kdoVyhral");
 
 const divAnimace = document.querySelector(".animace");   // definuji div pro animaci   
 const gif = document.createElement("img");   // GIF
@@ -45,7 +48,7 @@ function zobrazSkore () {
     }
     divSkoreMoje.textContent = skoreHrac;
     divSkorePC.textContent = skorePC;
-    divKolo.textContent = ("Kolo " + cisloKola + " / 5");
+    divKolo.textContent = ("Kolo " + cisloKola + " / " + pocetKol);
 }
 
 // Vyhodnocení kola
@@ -119,7 +122,10 @@ function hrajem () {
         kolo(mojeVolba,pcVolba);                // Vyhodnocení
         console.log(vysledekKola);
         setTimeout(zobrazSkore, 1000);
-        cisloKola ++;
+        cisloKola++;
+        if (cisloKola >= pocetKol) {
+            konec();
+        } 
 }
 
 tlacitkoNuzky.addEventListener("click", () => {
@@ -140,7 +146,12 @@ tlacitkoPapir.addEventListener("click", () => {
     hrajem ();
 });
 
+function konec() {
+    divTlacitka.classList.toggle("neviditelny");
+    divKdoVyhral.classList.toggle("neviditelny");
+    divKdoVyhral.textContent=("Hra skončila");
 
+};
 
 // if (skoreHrac > skorePC) {
 //         console.log("Vyhrál jsi nad PC! Svět je zachráněn! Hurá! ...Hromadný sex? Ne? OK boomer...");
