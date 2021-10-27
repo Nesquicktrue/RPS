@@ -1,7 +1,8 @@
 let skoreHrac = 0;   
 let skorePC = 0;
 let mojeVolba;
-let cisloKola = 1;         
+let cisloKola = 1;  
+let vysledekKola;       
 
 const tlacitkoNuzky = document.querySelector("#nuzky");  //definuji tlačítka
 const tlacitkoPapir = document.querySelector(".papir");
@@ -27,22 +28,21 @@ function computerHraje() {
     }
 }
 
-// Pro zobrazení výhry/prohry a připočtení bodů
-function vyhra() {
-    ++skoreHrac;
-    divVysledek.textContent = ("Toto kolo jsi vyhrál!");
-}
-
-function prohra() {
-    ++skorePC;
-    divVysledek.textContent = ("Toto kolo vyhrál PC");
-}
-
-function remiza() {
-    divVysledek.textContent = ("Toto kolo skončilo remízou");
-}
-
+// Zobrazí výherce kola a body
 function zobrazSkore () {
+    switch(vysledekKola) {
+        case "vyhra":
+            ++skoreHrac;
+            divVysledek.textContent = ("Toto kolo jsi vyhrál!");
+            break;
+        case "prohra":
+            ++skorePC;
+            divVysledek.textContent = ("Toto kolo vyhrál PC");
+            break;
+        default:
+            divVysledek.textContent = ("Toto kolo skončilo remízou");
+            break;
+    }
     divSkoreMoje.textContent = skoreHrac;
     divSkorePC.textContent = skorePC;
     divKolo.textContent = ("Kolo " + cisloKola + " / 5");
@@ -56,17 +56,17 @@ function kolo(hrac,pc) {
                 case "Kámen":
                     gif.setAttribute("src", "gif/rem.gif");
                     divAnimace.appendChild(gif);
-                    remiza();
+                    vysledekKola = "remiza";
                     break; 
                 case "Nůžky":
                     gif.setAttribute("src", "gif/kn.gif");
                     divAnimace.appendChild(gif);
-                    vyhra()
+                    vysledekKola = "vyhra";
                     break;
                 default:
                     gif.setAttribute("src", "gif/kp.gif");
                     divAnimace.appendChild(gif);
-                    prohra();
+                    vysledekKola = "prohra";
                     break;
             }
             break;
@@ -76,17 +76,17 @@ function kolo(hrac,pc) {
                 case "Kámen":
                     gif.setAttribute("src", "gif/nk.gif");
                     divAnimace.appendChild(gif);                    
-                    prohra();
+                    vysledekKola = "prohra";
                     break;
                 case "Nůžky":
                     gif.setAttribute("src", "gif/rem.gif");
                     divAnimace.appendChild(gif);
-                    remiza();
+                    vysledekKola = "remiza";
                     break;
                 default:
                     gif.setAttribute("src", "gif/np.gif");
                     divAnimace.appendChild(gif);
-                    vyhra();
+                    vysledekKola = "vyhra";
                     break;
             }
             break;
@@ -96,17 +96,17 @@ function kolo(hrac,pc) {
                 case "Kámen":
                     gif.setAttribute("src", "gif/pk.gif");
                     divAnimace.appendChild(gif);
-                    vyhra();
+                    vysledekKola = "vyhra";
                     break; 
                 case "Nůžky":
                     gif.setAttribute("src", "gif/pn.gif");
                     divAnimace.appendChild(gif);
-                    prohra();
+                    vysledekKola = "prohra";
                     break;
                 default:
                     gif.setAttribute("src", "gif/rem.gif");
                     divAnimace.appendChild(gif);
-                    remiza();
+                    vysledekKola = "remiza";
                     break;
             }
             break;            
@@ -114,27 +114,29 @@ function kolo(hrac,pc) {
     }
 }
 
-function cekam();
-
 function hrajem () {     
         pcVolba = computerHraje();              // PC volí svůj tah
         kolo(mojeVolba,pcVolba);                // Vyhodnocení
-        zobrazSkore();
+        console.log(vysledekKola);
+        setTimeout(zobrazSkore, 1000);
         cisloKola ++;
 }
 
 tlacitkoNuzky.addEventListener("click", () => {
     mojeVolba = "Nůžky";
+    divVysledek.textContent = ("");
     hrajem ();
 });
 
 tlacitkoKamen.addEventListener("click", () => {
     mojeVolba = "Kámen";
+    divVysledek.textContent = ("");
     hrajem ();
 });
 
 tlacitkoPapir.addEventListener("click", () => {
     mojeVolba = "Papír";
+    divVysledek.textContent = ("");
     hrajem ();
 });
 
