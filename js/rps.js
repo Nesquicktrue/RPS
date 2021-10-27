@@ -11,10 +11,9 @@ const divAnimace = document.querySelector(".animace");   // definuji div pro ani
 const gif = document.createElement("img");   // GIF
 
 const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky
+
 const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
-
-const textH3 = document.createElement("h3");
 
 // Tah PC
 function computerHraje() {
@@ -48,10 +47,8 @@ function remiza() {
 }
 
 function zobrazSkore () {
-    textH3.textContent = skoreHrac;
-    divSkoreMoje.appendChild(textH3);
-    textH3.textContent = skorePC;
-    divSkorePC.appendChild(textH3);
+    divSkoreMoje.textContent = skoreHrac;
+    divSkorePC.textContent = skorePC;
 }
 
 // Vyhodnocení kola
@@ -119,7 +116,6 @@ function kolo(hrac,pc) {
             
     }
 }
-
 
 
 function hrajem () {     
