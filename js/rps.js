@@ -10,7 +10,7 @@ const tlacitkoKamen = document.querySelector(".kamen");
 const divAnimace = document.querySelector(".animace");   // definuji div pro animaci   
 const gif = document.createElement("img");   // GIF
 
-const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky
+const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky a čítač kol
 const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
 const divKolo = document.querySelector(".kolo");
@@ -31,19 +31,15 @@ function computerHraje() {
 function vyhra() {
     ++skoreHrac;
     divVysledek.textContent = ("Toto kolo jsi vyhrál!");
-
-    console.log("Vyhráváš! Skóre:  Ty: " + skoreHrac + " | PC: " + skorePC);
 }
 
 function prohra() {
     ++skorePC;
     divVysledek.textContent = ("Toto kolo vyhrál PC");
-    console.log("Vyhrává PC. Skóre:  Ty: " + skoreHrac + " | PC: " + skorePC);
 }
 
 function remiza() {
     divVysledek.textContent = ("Toto kolo skončilo remízou");
-    console.log("Je to remíza! Skóre zůstává:  Ty: " + skoreHrac + " | PC: " + skorePC);
 }
 
 function zobrazSkore () {
@@ -118,21 +114,14 @@ function kolo(hrac,pc) {
     }
 }
 
+function cekam();
 
 function hrajem () {     
-        console.log("Kolo číslo: " + cisloKola);        // kolo začíná   
         pcVolba = computerHraje();              // PC volí svůj tah
-        console.log("Já hraji: " + mojeVolba); 
-        console.log("PC hraje: " + pcVolba);
-
         kolo(mojeVolba,pcVolba);                // Vyhodnocení
-        
         zobrazSkore();
-        
         cisloKola ++;
-        console.log("");                        // Mezera mezi tahy
 }
-
 
 tlacitkoNuzky.addEventListener("click", () => {
     mojeVolba = "Nůžky";
