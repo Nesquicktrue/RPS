@@ -11,9 +11,9 @@ const divAnimace = document.querySelector(".animace");   // definuji div pro ani
 const gif = document.createElement("img");   // GIF
 
 const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky
-
 const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
+const divKolo = document.querySelector(".kolo");
 
 // Tah PC
 function computerHraje() {
@@ -49,6 +49,7 @@ function remiza() {
 function zobrazSkore () {
     divSkoreMoje.textContent = skoreHrac;
     divSkorePC.textContent = skorePC;
+    divKolo.textContent = ("Kolo " + cisloKola + " / 5");
 }
 
 // Vyhodnocení kola
@@ -125,7 +126,9 @@ function hrajem () {
         console.log("PC hraje: " + pcVolba);
 
         kolo(mojeVolba,pcVolba);                // Vyhodnocení
+        
         zobrazSkore();
+        
         cisloKola ++;
         console.log("");                        // Mezera mezi tahy
 }
