@@ -1,6 +1,27 @@
 * {
     margin: 0px;
     padding: 0px;
+    /*  */
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.herniplan {
+    margin-top: 5%;
+    background-color:#c6f88c;
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 520px;
+    min-height: 433px;
+    border-radius: 10px;
+
 }
 
 

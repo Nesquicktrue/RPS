@@ -3,13 +3,18 @@ let skorePC = 0;
 let mojeVolba;
 let cisloKola = 1;         
 
-const tlacitkoNuzky = document.querySelector(".nuzky");
+const tlacitkoNuzky = document.querySelector("#nuzky");  //definuji tlačítka
 const tlacitkoPapir = document.querySelector(".papir");
 const tlacitkoKamen = document.querySelector(".kamen");
-const divAnimace = document.querySelector(".animace");
-const gif = document.createElement("img");
 
+const divAnimace = document.querySelector(".animace");   // definuji div pro animaci   
+const gif = document.createElement("img");   // GIF
 
+const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky
+const divSkorePC = document.querySelector(".skorePC");
+const divVysledek = document.querySelector(".vysledek");
+
+const textH3 = document.createElement("h3");
 
 // Tah PC
 function computerHraje() {
@@ -26,16 +31,27 @@ function computerHraje() {
 // Pro zobrazení výhry/prohry a připočtení bodů
 function vyhra() {
     ++skoreHrac;
+    divVysledek.textContent = ("Toto kolo jsi vyhrál!");
+
     console.log("Vyhráváš! Skóre:  Ty: " + skoreHrac + " | PC: " + skorePC);
 }
 
 function prohra() {
     ++skorePC;
+    divVysledek.textContent = ("Toto kolo vyhrál PC");
     console.log("Vyhrává PC. Skóre:  Ty: " + skoreHrac + " | PC: " + skorePC);
 }
 
 function remiza() {
+    divVysledek.textContent = ("Toto kolo skončilo remízou");
     console.log("Je to remíza! Skóre zůstává:  Ty: " + skoreHrac + " | PC: " + skorePC);
+}
+
+function zobrazSkore () {
+    textH3.textContent = skoreHrac;
+    divSkoreMoje.appendChild(textH3);
+    textH3.textContent = skorePC;
+    divSkorePC.appendChild(textH3);
 }
 
 // Vyhodnocení kola
@@ -56,7 +72,7 @@ function kolo(hrac,pc) {
                 default:
                     gif.setAttribute("src", "gif/kp.gif");
                     divAnimace.appendChild(gif);
-                    vyhra();
+                    prohra();
                     break;
             }
             break;
@@ -104,6 +120,8 @@ function kolo(hrac,pc) {
     }
 }
 
+
+
 function hrajem () {     
         console.log("Kolo číslo: " + cisloKola);        // kolo začíná   
         pcVolba = computerHraje();              // PC volí svůj tah
@@ -111,6 +129,7 @@ function hrajem () {
         console.log("PC hraje: " + pcVolba);
 
         kolo(mojeVolba,pcVolba);                // Vyhodnocení
+        zobrazSkore();
         cisloKola ++;
         console.log("");                        // Mezera mezi tahy
 }
@@ -130,6 +149,8 @@ tlacitkoPapir.addEventListener("click", () => {
     mojeVolba = "Papír";
     hrajem ();
 });
+
+
 
 // if (skoreHrac > skorePC) {
 //         console.log("Vyhrál jsi nad PC! Svět je zachráněn! Hurá! ...Hromadný sex? Ne? OK boomer...");
