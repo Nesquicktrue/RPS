@@ -54,7 +54,7 @@ function hrajem () {
     setTimeout(zobrazSkore, 1000);          // prodleva pro dokončení animace    
     if (cisloKola >= pocetKol) {                        
         divTlacitka.classList.toggle("neviditelny");   // hra skončila - schovávám tlačítka
-        setTimeout(konec, 1000);
+        setTimeout(konec, 1000);            // musím počkat na animaci, než zobrazím konečný stav
     } 
 }
 
@@ -163,11 +163,11 @@ function zobrazSkore () {
 function konec() {
     
     if (skoreHrac > skorePC) {
-            divKdoVyhral.textContent=("VYHRÁL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
+            divKdoVyhral.textContent=(`VYHRÁL JSI HRU SE SKÓRE ${skoreHrac} : ${skorePC}`);
         } else if (skoreHrac === skorePC) {
-            divKdoVyhral.textContent=("REMÍZOVAL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
+            divKdoVyhral.textContent=(`REMÍZOVAL JSI HRU SE SKÓRE ${skoreHrac} : ${skorePC}`);
         } else {
-            divKdoVyhral.textContent=("PROHRÁL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
+            divKdoVyhral.textContent=(`PROHRÁL JSI HRU SE SKÓRE ${skoreHrac} : ${skorePC}`);
     }
 
     divKdoVyhral.classList.toggle("neviditelny");  // odkrývám výherce
