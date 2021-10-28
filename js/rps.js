@@ -9,7 +9,7 @@ const tlacitkoNuzky = document.querySelector(".nuzky");  //definuji tlačítka
 const tlacitkoPapir = document.querySelector(".papir");
 const tlacitkoKamen = document.querySelector(".kamen");
 const divTlacitka = document.querySelector(".tlacitka");
-const divKdoVyhral = document.querySelector(".kdoVyhral");
+const divKdoVyhral = document.querySelector("#kdoVyhral");
 const divSkore = document.querySelector("#skore");
 
 const divAnimace = document.querySelector(".animace");   // definuji div pro animaci   
@@ -53,7 +53,8 @@ function hrajem () {
     kolo(mojeVolba,pcVolba);                // Vyhodnocení
     setTimeout(zobrazSkore, 1000);          // prodleva pro dokončení animace    
     if (cisloKola >= pocetKol) {                        
-        konec();
+        divTlacitka.classList.toggle("neviditelny");   // hra skončila - schovávám tlačítka
+        setTimeout(konec, 1000);
     } 
 }
 
@@ -83,11 +84,13 @@ function kolo(hrac,pc) {
                     gif.setAttribute("src", "gif/kn.gif");
                     divAnimace.appendChild(gif);
                     vysledekKola = "vyhra";
+                    ++skoreHrac;
                     break;
                 default:
                     gif.setAttribute("src", "gif/kp.gif");
                     divAnimace.appendChild(gif);
                     vysledekKola = "prohra";
+                    ++skorePC;
                     break;
             }
             break;
@@ -98,6 +101,7 @@ function kolo(hrac,pc) {
                     gif.setAttribute("src", "gif/nk.gif");
                     divAnimace.appendChild(gif);                    
                     vysledekKola = "prohra";
+                    ++skorePC
                     break;
                 case "Nůžky":
                     gif.setAttribute("src", "gif/rem.gif");
@@ -108,6 +112,7 @@ function kolo(hrac,pc) {
                     gif.setAttribute("src", "gif/np.gif");
                     divAnimace.appendChild(gif);
                     vysledekKola = "vyhra";
+                    ++skoreHrac;
                     break;
             }
             break;
@@ -118,11 +123,13 @@ function kolo(hrac,pc) {
                     gif.setAttribute("src", "gif/pk.gif");
                     divAnimace.appendChild(gif);
                     vysledekKola = "vyhra";
+                    ++skoreHrac;
                     break; 
                 case "Nůžky":
                     gif.setAttribute("src", "gif/pn.gif");
                     divAnimace.appendChild(gif);
                     vysledekKola = "prohra";
+                    ++skorePC;
                     break;
                 default:
                     gif.setAttribute("src", "gif/rem.gif");
@@ -139,11 +146,9 @@ function kolo(hrac,pc) {
 function zobrazSkore () {
     switch(vysledekKola) {
         case "vyhra":
-            ++skoreHrac;
             divVysledek.textContent = ("Vyhráváš");
             break;
         case "prohra":
-            ++skorePC;
             divVysledek.textContent = ("Prohráváš");
             break;
         default:
@@ -156,16 +161,15 @@ function zobrazSkore () {
 
 // Hra končí, schovám tlačítka a oznámím celkového výherce
 function konec() {
-    divTlacitka.classList.toggle("neviditelny");   // hra skončila - schovávám tlačítka
-    divKdoVyhral.classList.toggle("neviditelny");  // odkrývám výherce
+    
     if (skoreHrac > skorePC) {
-        divKdoVyhral.firstChild.textContent=("Vyhrál jsi nad PC!");
-        divKdoVyhral.textContent=("Svět je zachráněn! Hurá! ...Hromadný sex? Ne? OK boomer..." );
-    } else if (skoreHrac = skorePC) {
-        divKdoVyhral.firstChild.textContent=("Hra skončila remízou!");
-        divKdoVyhral.textContent=("Stroje si vezmou půl světa, domu i tvé manželky...a to myslím tu lepší půlku..." );
-    } else {
-        divKdoVyhral.firstChild.textContent=("Prohrál si!");
-        divKdoVyhral.textContent=("Ve své pouti jsi neobstál a svět bude zničen. Fakt díky moc..." );
+            divKdoVyhral.textContent=("VYHRÁL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
+        } else if (skoreHrac === skorePC) {
+            divKdoVyhral.textContent=("REMÍZOVAL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
+        } else {
+            divKdoVyhral.textContent=("PROHRÁL JSI HRU SE SKÓRE " + skoreHrac + " : " + skorePC);
     }
+
+    divKdoVyhral.classList.toggle("neviditelny");  // odkrývám výherce
+
 };  
