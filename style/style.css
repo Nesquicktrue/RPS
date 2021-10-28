@@ -1,7 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
-    /*  */
+    font-family:Arial, Helvetica, sans-serif 
 }
 
 .neviditelny {
@@ -17,7 +17,7 @@
 .herniplan {
     margin-top: 5%;
     background-color:#c6f88c;
-    border: 5px solid black;
+    border: 4px solid #503657;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +25,77 @@
     width: 520px;
     min-height: 433px;
     border-radius: 10px;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 5%;
+    border: none;
+    font-weight: 900;
+    color: #503657;
+    text-transform: uppercase;
+    background: #94d7ed;
+    padding: 20px;
+    border: 2px solid #503657;
+    border-radius: 6px;
+    transition: all 0.3s ease 0s;
+}
+    button:hover {
+    color: #503657;
+    border-radius: 50px;
+    border-color: #503657;
+    transition: all 0.3s ease 0s;
+    }
+
+.vysledek {
+    color: #503657;
+    font-weight: 900;
+    font-size: 150%;
+    min-height: 35px;
+    text-align: center;
+
 
 }
 
+.tabulka {
+    display: flex;
+    min-width: 500px;
+    justify-content: center;
+    gap: 15%;
 
+}
+
+#vysledek-schovat {
+    border: 2px solid #503657;
+    font-weight: 300;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    background-color: #94d7ed;
+    width: 500px;
+
+}
+
+.tab {
+    border: 2px solid #503657;
+    padding-bottom: 5%;
+    font-weight: 300;
+    flex: 1;
+    border-radius: 5px;
+    background-color: #94d7ed;
+}
+
+.skoreMoje, .skorePC, .kolo {
+    font-weight: 900;
+    font-size: 200%;
+    color: #503657;
+    text-align: center;
+
+}
+
+.footer {
+    font-size: x-small;
+    padding-top: 5%;
+    color: #503657;
+}

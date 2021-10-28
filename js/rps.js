@@ -18,6 +18,7 @@ const gif = document.createElement("img");   // GIF
 const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro výsledky a čítač kol
 const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
+const divVysledekSchovat = document.querySelector("#vysledek-schovat");
 const divKolo = document.querySelector(".kolo");
 
 // Tlačítka začnou hru
@@ -42,10 +43,11 @@ tlacitkoPapir.addEventListener("click", () => {
 // Hra začíná na počet kol = pocetKol
 function hrajem () {
     cisloKola++;
-    divKolo.textContent = ("Kolo " + cisloKola + " / " + pocetKol);
+    divKolo.textContent = (cisloKola + " / " + pocetKol);
 
     if (divSkore.classList.value == "neviditelny") {    // hra začala prvním tahem, odkrývám pole s výsledky
-        divSkore.classList.remove("neviditelny")
+        divSkore.classList.remove("neviditelny");
+        divVysledekSchovat.classList.remove("neviditelny");
     }        
     pcVolba = computerHraje();              // PC volí svůj tah
     kolo(mojeVolba,pcVolba);                // Vyhodnocení
@@ -138,14 +140,14 @@ function zobrazSkore () {
     switch(vysledekKola) {
         case "vyhra":
             ++skoreHrac;
-            divVysledek.textContent = ("Toto kolo jsi vyhrál!");
+            divVysledek.textContent = ("Vyhráváš");
             break;
         case "prohra":
             ++skorePC;
-            divVysledek.textContent = ("Toto kolo vyhrál PC");
+            divVysledek.textContent = ("Prohráváš");
             break;
         default:
-            divVysledek.textContent = ("Toto kolo skončilo remízou");
+            divVysledek.textContent = ("Remíza");
             break;
     }
     divSkoreMoje.textContent = skoreHrac;
