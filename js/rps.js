@@ -5,11 +5,12 @@ let cisloKola = 0;
 let vysledekKola;
 let pocetKol = 5;       
 
-const tlacitkoNuzky = document.querySelector("#nuzky");  //definuji tlačítka
+const tlacitkoNuzky = document.querySelector(".nuzky");  //definuji tlačítka
 const tlacitkoPapir = document.querySelector(".papir");
 const tlacitkoKamen = document.querySelector(".kamen");
 const divTlacitka = document.querySelector(".tlacitka");
 const divKdoVyhral = document.querySelector(".kdoVyhral");
+const divSkore = document.querySelector("#skore");
 
 const divAnimace = document.querySelector(".animace");   // definuji div pro animaci   
 const gif = document.createElement("img");   // GIF
@@ -19,7 +20,42 @@ const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
 const divKolo = document.querySelector(".kolo");
 
-// Tah PC
+// Tlačítka začnou hru
+tlacitkoNuzky.addEventListener("click", () => {
+    mojeVolba = "Nůžky";
+    divVysledek.textContent = ("");
+    hrajem ();
+});
+
+tlacitkoKamen.addEventListener("click", () => {
+    mojeVolba = "Kámen";
+    divVysledek.textContent = ("");
+    hrajem ();
+});
+
+tlacitkoPapir.addEventListener("click", () => {
+    mojeVolba = "Papír";
+    divVysledek.textContent = ("");
+    hrajem ();
+});
+
+// Hra začíná na počet kol = pocetKol
+function hrajem () {
+    cisloKola++;
+    divKolo.textContent = ("Kolo " + cisloKola + " / " + pocetKol);
+
+    if (divSkore.classList.value == "neviditelny") {    // hra začala prvním tahem, odkrývám pole s výsledky
+        divSkore.classList.remove("neviditelny")
+    }        
+    pcVolba = computerHraje();              // PC volí svůj tah
+    kolo(mojeVolba,pcVolba);                // Vyhodnocení
+    setTimeout(zobrazSkore, 1000);          // prodleva pro dokončení animace    
+    if (cisloKola >= pocetKol) {                        
+        konec();
+    } 
+}
+
+// PC volí svůj tah
 function computerHraje() {
     let nahodneCislo = Math.random();
     if (nahodneCislo <= 0.3) {
@@ -31,27 +67,7 @@ function computerHraje() {
     }
 }
 
-// Zobrazí výherce kola a body
-function zobrazSkore () {
-    switch(vysledekKola) {
-        case "vyhra":
-            ++skoreHrac;
-            divVysledek.textContent = ("Toto kolo jsi vyhrál!");
-            break;
-        case "prohra":
-            ++skorePC;
-            divVysledek.textContent = ("Toto kolo vyhrál PC");
-            break;
-        default:
-            divVysledek.textContent = ("Toto kolo skončilo remízou");
-            break;
-    }
-    divSkoreMoje.textContent = skoreHrac;
-    divSkorePC.textContent = skorePC;
-    divKolo.textContent = ("Kolo " + cisloKola + " / " + pocetKol);
-}
-
-// Vyhodnocení kola
+// Vyhodnocení vítěze kola
 function kolo(hrac,pc) {
     switch (hrac) {
         case "Kámen":
@@ -117,47 +133,37 @@ function kolo(hrac,pc) {
     }
 }
 
-function hrajem () {     
-        pcVolba = computerHraje();              // PC volí svůj tah
-        kolo(mojeVolba,pcVolba);                // Vyhodnocení
-        console.log(vysledekKola);
-        setTimeout(zobrazSkore, 1000);
-        cisloKola++;
-        if (cisloKola >= pocetKol) {
-            konec();
-        } 
-}
+// Zobrazí výherce kola a průběžné body
+function zobrazSkore () {
+    switch(vysledekKola) {
+        case "vyhra":
+            ++skoreHrac;
+            divVysledek.textContent = ("Toto kolo jsi vyhrál!");
+            break;
+        case "prohra":
+            ++skorePC;
+            divVysledek.textContent = ("Toto kolo vyhrál PC");
+            break;
+        default:
+            divVysledek.textContent = ("Toto kolo skončilo remízou");
+            break;
+    }
+    divSkoreMoje.textContent = skoreHrac;
+    divSkorePC.textContent = skorePC;
+    }
 
-tlacitkoNuzky.addEventListener("click", () => {
-    mojeVolba = "Nůžky";
-    divVysledek.textContent = ("");
-    hrajem ();
-});
-
-tlacitkoKamen.addEventListener("click", () => {
-    mojeVolba = "Kámen";
-    divVysledek.textContent = ("");
-    hrajem ();
-});
-
-tlacitkoPapir.addEventListener("click", () => {
-    mojeVolba = "Papír";
-    divVysledek.textContent = ("");
-    hrajem ();
-});
-
+// Hra končí, schovám tlačítka a oznámím celkového výherce
 function konec() {
-    divTlacitka.classList.toggle("neviditelny");
-    divKdoVyhral.classList.toggle("neviditelny");
-    divKdoVyhral.textContent=("Hra skončila");
-
-};
-
-// if (skoreHrac > skorePC) {
-//         console.log("Vyhrál jsi nad PC! Svět je zachráněn! Hurá! ...Hromadný sex? Ne? OK boomer...");
-//     } else if (skoreHrac === skorePC){
-//         console.log("Je to remíza. Stroje si vezmou půl světa, domu i tvé manželky...a to myslím tu lepší půlku...")
-//         }
-//        else{
-//         console.log("PC získal více bodů a vyhrál nad tebou. Ve své pouti jsi neobstál a svět bude zničen. Fakt díky moc...")
-// }   
+    divTlacitka.classList.toggle("neviditelny");   // hra skončila - schovávám tlačítka
+    divKdoVyhral.classList.toggle("neviditelny");  // odkrývám výherce
+    if (skoreHrac > skorePC) {
+        divKdoVyhral.firstChild.textContent=("Vyhrál jsi nad PC!");
+        divKdoVyhral.textContent=("Svět je zachráněn! Hurá! ...Hromadný sex? Ne? OK boomer..." );
+    } else if (skoreHrac = skorePC) {
+        divKdoVyhral.firstChild.textContent=("Hra skončila remízou!");
+        divKdoVyhral.textContent=("Stroje si vezmou půl světa, domu i tvé manželky...a to myslím tu lepší půlku..." );
+    } else {
+        divKdoVyhral.firstChild.textContent=("Prohrál si!");
+        divKdoVyhral.textContent=("Ve své pouti jsi neobstál a svět bude zničen. Fakt díky moc..." );
+    }
+};  
