@@ -19,6 +19,7 @@ const divSkoreMoje = document.querySelector(".skoreMoje");  // definuji div pro 
 const divSkorePC = document.querySelector(".skorePC");
 const divVysledek = document.querySelector(".vysledek");
 const divVysledekSchovat = document.querySelector("#vysledek-schovat");
+const tlacitkoNovaHra = document.querySelector("#tlacitkoNovaHra")
 const divKolo = document.querySelector(".kolo");
 
 // Tlačítka začnou hru
@@ -38,6 +39,10 @@ tlacitkoPapir.addEventListener("click", () => {
     mojeVolba = "Papír";
     divVysledek.textContent = ("");
     hrajem ();
+});
+
+tlacitkoNovaHra.addEventListener("click", () => {
+    location.reload();
 });
 
 // Hra začíná na počet kol = pocetKol
@@ -171,5 +176,5 @@ function konec() {
     }
 
     divKdoVyhral.classList.toggle("neviditelny");  // odkrývám výherce
-
+    tlacitkoNovaHra.classList.toggle("neviditelny"); 
 };  
