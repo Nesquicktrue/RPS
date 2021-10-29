@@ -1,13 +1,22 @@
 * {
     margin: 0px;
     padding: 0px;
-    font-family:Arial, Helvetica, sans-serif;
 }
 
 body {
-    transform: scale(0.9);
-    transform-origin: 0 0;
+    font-family:Arial, Helvetica, sans-serif;
+    
    }
+
+img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.animace {
+    max-width: 100%;
+    overflow: hidden;
+}
 
 .neviditelny {
     display: none;
@@ -27,7 +36,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 520px;
+   
+    max-width: 520px;
+    /* width: 520px; */
     min-height: 433px;
     border-radius: 10px;
 }
@@ -41,7 +52,7 @@ body {
 }
 
 button {
-    width: 100px;
+    width: 30%;
     height: 50px;
     border-radius: 5px;
     margin-top: 5%;
@@ -74,7 +85,7 @@ button {
 
 .tabulka {
     display: flex;
-    min-width: 500px;
+    /* min-width: 500px; */
     justify-content: center;
     gap: 15%;
 
@@ -86,7 +97,7 @@ button {
     margin-bottom: 5%;
     border-radius: 5px;
     background-color: #94d7ed;
-    width: 500px;
+    width: 95%;
 
 }
 
