@@ -13,6 +13,7 @@ body {
 
 .wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -25,7 +26,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
     width: 400px;
     height: 610px;
     min-height: 433px;
@@ -37,7 +37,6 @@ body {
     font-size: large;
     color: brown;
     padding-top: 5%;
-
 }
 
 .tlacitka {
@@ -57,7 +56,8 @@ button {
     border-radius: 6px;
     transition: all 0.3s ease 0s;
 }
-    button:hover {
+
+button:hover {
     color: #503657;
     border-radius: 50px;
     border-color: #503657;
@@ -87,7 +87,6 @@ button {
     justify-content: center;
     gap: 5%;
     width: 350px;
-
 }
 
 .tabItem {
@@ -106,8 +105,19 @@ button {
     text-align: center;
 }
 
-.footer {
-    font-size: x-small;
-    padding-top: 5%;
-    color: #503657;
+.foot {
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+}
+
+a {
+    text-decoration: none;
+    color: darkslategray;
+    vertical-align: middle;
+}
+
+H6 {
+    font-weight: bold;
+    margin-top: 2px;
 }
